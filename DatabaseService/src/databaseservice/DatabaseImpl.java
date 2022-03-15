@@ -14,12 +14,11 @@ public class DatabaseImpl implements Database{
 	
 	public DatabaseImpl() {
 		this.driver = "com.mysql.jdbc.Driver";
-		this.url = "jdbc:mysql://localhost:3306/";
-		this.user = "sms-user";
-		this.password = "sms-user";
+		this.url = "jdbc:mysql://localhost:3306/sms?useSSL=false";
+		this.user = "root";
+		this.password = "";
 	}
 	
-
 	@SuppressWarnings("finally")
 	@Override
 	public Connection getDatabaseConnection() {

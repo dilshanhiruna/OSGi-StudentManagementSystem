@@ -9,13 +9,13 @@ public class Activator implements BundleActivator {
 	private ServiceRegistration serviceRegistration;
 	
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Database Publisher service started");
+		System.out.println("Database service started");
 		Database database = new DatabaseImpl();
 		serviceRegistration = context.registerService(Database.class.getName(), database, null);
 	}
 
 	public void stop(BundleContext context) throws Exception {
-		System.out.println("Database Publisher service stopped");
+		System.out.println("Database service stopped");
 		serviceRegistration.unregister();
 	}
 
