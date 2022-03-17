@@ -1,6 +1,6 @@
 package databaseservice;
 
-import java.sql.Connection;
+import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -23,7 +23,7 @@ public class DatabaseImpl implements Database{
 	@Override
 	public Connection getDatabaseConnection() {
 		try {
-			Class.forName(user);
+			Class.forName(driver);
 			con = (Connection) DriverManager.getConnection(url, user, password);
 			System.out.println("DB Connection Successfull");
 		} catch (ClassNotFoundException exc) {

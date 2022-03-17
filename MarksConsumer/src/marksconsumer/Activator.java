@@ -1,7 +1,5 @@
 package marksconsumer;
 
-import java.util.Scanner;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -16,8 +14,9 @@ public class Activator implements BundleActivator {
 		System.out.println("Marks Consumer Starts");
 		serviceReference = context.getServiceReference(MarksService.class.getName());
 		@SuppressWarnings("unchecked")
-		MarksService marksUI = (MarksService)context.getService(serviceReference);	
-		menu(marksUI);
+		MarksService marksService = (MarksService)context.getService(serviceReference);	
+		menu(marksService);
+
 	}
 
 	public void stop(BundleContext context) throws Exception {
@@ -25,9 +24,9 @@ public class Activator implements BundleActivator {
 		context.ungetService(serviceReference);
 	}
 	
-	public void menu(MarksService service) {
+	public void menu(MarksService marksService) {
 		
-		System.out.print("WOOOOOH!!! IT WORKS");
+		marksService.insertMarks(911, 444);
 		
 	}
 

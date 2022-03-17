@@ -1,4 +1,4 @@
-package markmodel;
+package markspublisher;
 
 public class MarkModel {
 

@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import databaseservice.Database;
 import databaseservice.DatabaseImpl;
-import markmodel.MarkModel;
 
 
 public class MarksServiceImpl implements MarksService {
@@ -32,6 +31,10 @@ public class MarksServiceImpl implements MarksService {
 	public void insertMarks(Integer studentID, Integer subjectID) {
 		// TODO Auto-generated method stub
 		
+		System.out.println(studentID);
+		System.out.println(subjectID);
+		System.out.println("Marks inserted");
+		
 	}
 
 	@Override
@@ -48,20 +51,23 @@ public class MarksServiceImpl implements MarksService {
 	
 	@Override
 	public ArrayList<MarkModel> getMarks(Integer subjectID) {
+		ArrayList<MarkModel> arr = new ArrayList<>();
+		MarkModel mm = new MarkModel(12,"dsfsd");
+		arr.add(mm);
 		// TODO Auto-generated method stub
-		return null;
+		return arr;
 	}
 
 	@Override
 	public String getHighestMarks(Integer subjectID) {
 		// TODO Auto-generated method stub
-		return null;
+		return "getHighestMarks";
 	}
 
 	@Override
 	public double getAvgMarks(Integer subjectID) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 0.0;
 	}
 
 }

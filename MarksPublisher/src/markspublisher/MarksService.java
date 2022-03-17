@@ -2,8 +2,6 @@ package markspublisher;
 
 import java.util.ArrayList;
 
-import markmodel.MarkModel;
-
 public interface MarksService {
 	
 	public void insertMarks(Integer studentID,Integer subjectID);
