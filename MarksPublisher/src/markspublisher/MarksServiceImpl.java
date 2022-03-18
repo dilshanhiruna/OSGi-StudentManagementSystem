@@ -31,8 +31,6 @@ public class MarksServiceImpl implements MarksService {
 	public void insertMarks(Integer studentID, Integer subjectID) {
 		// TODO Auto-generated method stub
 		
-		System.out.println(studentID);
-		System.out.println(subjectID);
 		System.out.println("Marks inserted");
 		
 	}
@@ -52,7 +50,7 @@ public class MarksServiceImpl implements MarksService {
 	@Override
 	public ArrayList<MarkModel> getMarks(Integer subjectID) {
 		ArrayList<MarkModel> arr = new ArrayList<>();
-		MarkModel mm = new MarkModel(12,"dsfsd");
+		MarkModel mm = new MarkModel(11,"text");
 		arr.add(mm);
 		// TODO Auto-generated method stub
 		return arr;

@@ -13,10 +13,13 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		System.out.println("Marks Consumer Starts");
 		serviceReference = context.getServiceReference(MarksService.class.getName());
-		@SuppressWarnings("unchecked")
-		MarksService marksService = (MarksService)context.getService(serviceReference);	
-		menu(marksService);
-
+		
+		if(serviceReference != null) {
+			MarksService marksService = (MarksService)context.getService(serviceReference);
+			menu(marksService);
+		} else {
+			System.err.println("service reference not found.");
+		}
 	}
 
 	public void stop(BundleContext context) throws Exception {
@@ -26,7 +29,7 @@ public class Activator implements BundleActivator {
 	
 	public void menu(MarksService marksService) {
 		
-		marksService.insertMarks(911, 444);
+		marksService.insertMarks(111, 222);
 		
 	}
 

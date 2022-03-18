@@ -10,8 +10,8 @@ public class Activator implements BundleActivator {
 	
 	public void start(BundleContext bundleContext) throws Exception {
 		System.out.println("Marks Publisher started");
-		MarksServiceImpl marksInterface = new MarksServiceImpl();
-		serviceRegistration = bundleContext.registerService(MarksServiceImpl.class.getName(), marksInterface, null);
+		MarksService marksInterface = new MarksServiceImpl();
+		serviceRegistration = bundleContext.registerService(MarksService.class.getName(), marksInterface, null);
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
