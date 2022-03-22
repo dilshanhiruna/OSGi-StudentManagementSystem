@@ -30,9 +30,9 @@ public class MarksServiceImpl implements MarksService {
 //		connection = database.getDatabaseConnection();
 		
 		//add default marks to marks arrayList
-		mark.add(new Marks("Rochell","Grade 5","Math",90));
-		mark.add(new Marks("Tom","Grade 3","Math",88));
-		mark.add(new Marks("Haaiq","Grade 4","Science",60));
+		mark.add(new Marks("Rochell","Grade 4","Math",90));
+		mark.add(new Marks("Tom","Grade 4","Math",88));
+		mark.add(new Marks("Haaiq","Grade 4","Math",60));
 		mark.add(new Marks("Katie","Grade 4","Math",67));
 		mark.add(new Marks("Jasmin","Grade 4","Math",66));
 		mark.add(new Marks("Natalia","Grade 4","Math",80));
@@ -62,14 +62,42 @@ public class MarksServiceImpl implements MarksService {
 	}
 
 	@Override
-	public void updateMarks(Integer studentID, Integer subjectID) {
-		// TODO Auto-generated method stub
+	public void updateMarks(String student, String subject,String grade) {
+		int input;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		for(int i=0;i<mark.size();i++) {
+			if(mark.get(i).getGrade() == grade && mark.get(i).getSubject() == subject && mark.get(i).getStudentName() == student) {
+				
+				System.out.println("Please enter new marks: ");
+				input = Integer.parseInt(sc.next().trim());
+				
+				mark.get(i).setMarks(input);
+				
+				System.out.println("Marks updated succesfully!");
+				
+			}
+		}
 		
 	}
 
 	@Override
-	public void deleteMarks(Integer studentID, Integer subjectID) {
-		// TODO Auto-generated method stub
+	public void deleteMarks(String student, String subject,String grade) {
+		
+		Marks removed = null;
+		
+		for(int i=0;i<mark.size();i++) {
+			if(mark.get(i).getGrade() == grade && mark.get(i).getSubject() == subject && mark.get(i).getStudentName() == student) {
+				
+				removed = mark.remove(i);
+			}
+		}
+		if(removed != null) {
+			System.out.println("Marks Removed");
+		}else {
+			System.out.println("No entries!");
+		}
 		
 	}
 	
