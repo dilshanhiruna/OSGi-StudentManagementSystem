@@ -7,7 +7,7 @@ public interface MarksService {
 	public void updateMarks(Integer studentID,Integer subjectID);
 	public void deleteMarks(Integer studentID,Integer subjectID);
 	public void getSubjectMarks(String grade, String subject);
-	public String getHighestMarks(Integer subject);
-	public double getAvgMarks(Integer subject);
+	public String getHighestMarks(String grade, String subject);
+	public String getAvgMarks(String grade, String subject);
 	
 }

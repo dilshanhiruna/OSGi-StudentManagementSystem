@@ -53,13 +53,15 @@ public class Activator implements BundleActivator {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("\n");
-		System.out.println("Student Management System v1.0");
+		System.out.println("-----Student Management System v1.0-----");
 		System.out.println("1) Enter Marks ");
 		System.out.println("2) Update Marks");
 		System.out.println("3) Delete Marks");
 		System.out.println("4) Get Marks");
+		System.out.println("5) Get Higest Marks");
+		System.out.println("6) Get Average Marks");
 		
-		System.out.println("Enter (1/2/3/4/): ");
+		System.out.println("Enter (1/2/3/4/5/6): ");
 		input = Integer.parseInt(sc.next().trim());
 		System.out.println("\n");
 		
@@ -69,6 +71,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("Please Select a grade:");
 			
+			//store the grade
 			String selectedGrade = gradeService.getGrade();
 			
 			System.out.println("---------------------");
@@ -76,6 +79,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("Please Select a student:");
 			
+			//store the student
 			String selectedStudent= studentService.getStudents(selectedGrade);
 			
 			System.out.println("---------------------");
@@ -83,6 +87,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("Please Select a subject;");
 			
+			//store the subject
 			String selectedSubject= subjectService.getSubjects(selectedGrade);
 			
 			System.out.println("---------------------");
@@ -90,12 +95,20 @@ public class Activator implements BundleActivator {
 						
 			System.out.println("---------------------");
 
+			//insert marks
 			marksService.insertMarks(selectedStudent, selectedGrade, selectedSubject);
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
+		}
+		else if(input == 2) {
+			menu(marksService,gradeService,studentService,subjectService);
+		}
+		else if(input == 3) {
+			menu(marksService,gradeService,studentService,subjectService);
 		}
 		else if(input == 4) {
 			
@@ -103,6 +116,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("Please Select a grade:");
 			
+			//store the grade
 			String selectedGrade = gradeService.getGrade();
 			
 			
@@ -111,13 +125,75 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("Please Select a subject:");
 			
+			//store the subject
 			String selectedSubject= subjectService.getSubjects(selectedGrade);
 			
 
 			System.out.println("---------------------");
 			System.out.println("[GRADE: "+selectedGrade+"] "+"[SUBJECT: "+selectedSubject+"]\n");
 			
+			//get all subject marks
 			marksService.getSubjectMarks(selectedGrade, selectedSubject);
+			
+			System.out.println("---------------------");
+			
+			menu(marksService,gradeService,studentService,subjectService);
+			
+		}
+		else if(input == 5) {
+			
+			System.out.println("---------------------");
+			
+			System.out.println("Please Select a grade:");
+			
+			//store the grade
+			String selectedGrade = gradeService.getGrade();
+			
+			
+			System.out.println("---------------------");
+			System.out.println("[GRADE: "+selectedGrade+"] "+" [SUBJECT: ]\n");
+			
+			System.out.println("Please Select a subject:");
+			
+			//store the subject
+			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			
+
+			System.out.println("---------------------");
+		
+			//get highest marks in a subject
+			
+			System.out.println(marksService.getHighestMarks(selectedGrade, selectedSubject));
+			
+			System.out.println("---------------------");
+			
+			menu(marksService,gradeService,studentService,subjectService);
+			
+		}
+		else if(input == 6) {
+			
+			System.out.println("---------------------");
+			
+			System.out.println("Please Select a grade:");
+			
+			//store the grade
+			String selectedGrade = gradeService.getGrade();
+			
+			
+			System.out.println("---------------------");
+			System.out.println("[GRADE: "+selectedGrade+"] "+" [SUBJECT: ]\n");
+			
+			System.out.println("Please Select a subject:");
+			
+			//store the subject
+			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			
+
+			System.out.println("---------------------");
+		
+			//get highest marks in a subject
+			
+			System.out.println(marksService.getAvgMarks(selectedGrade, selectedSubject));
 			
 			System.out.println("---------------------");
 			

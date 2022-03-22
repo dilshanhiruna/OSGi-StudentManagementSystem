@@ -29,15 +29,14 @@ public class MarksServiceImpl implements MarksService {
 //		database = new DatabaseImpl();
 //		connection = database.getDatabaseConnection();
 		
-		Marks mr1 = new Marks("Rochell","Grade 5","Math",90);
-		Marks mr2 = new Marks("Tom","Grade 3","Math",88);
-		Marks mr3 = new Marks("Haaiq","Grade 4","Science",60);
-		Marks mr4 = new Marks("Katie","Grade 4","Math",67);
-		
-		mark.add(mr1);
-		mark.add(mr2);
-		mark.add(mr3);
-		mark.add(mr4);
+		//add default marks to marks arrayList
+		mark.add(new Marks("Rochell","Grade 5","Math",90));
+		mark.add(new Marks("Tom","Grade 3","Math",88));
+		mark.add(new Marks("Haaiq","Grade 4","Science",60));
+		mark.add(new Marks("Katie","Grade 4","Math",67));
+		mark.add(new Marks("Jasmin","Grade 4","Math",66));
+		mark.add(new Marks("Natalia","Grade 4","Math",80));
+		mark.add(new Marks("Jenny","Grade 4","Math",45));
 		
 	}
 
@@ -76,22 +75,58 @@ public class MarksServiceImpl implements MarksService {
 	
 	@Override
 	public void getSubjectMarks(String grade, String subject) {
-		
+		//printout all the student with marks
 		for(int i=0;i<mark.size();i++) {
+			if(mark.get(i).getGrade() == grade && mark.get(i).getSubject() == subject) {
 			System.out.println(mark.get(i).getStudentName()+" - "+ mark.get(i).getMarks());
+			}
 		}
 	}
 
 	@Override
-	public String getHighestMarks(Integer subjectID) {
-		// TODO Auto-generated method stub
-		return "getHighestMarks";
+	public String getHighestMarks(String grade, String subject){
+		
+		Integer higestMarks =0;
+		String student ="";
+		
+		for(int i=0;i<mark.size();i++) {
+			
+			if(mark.get(i).getGrade() == grade && mark.get(i).getSubject() == subject) {
+				
+				if(higestMarks<mark.get(i).getMarks()) {
+					higestMarks = mark.get(i).getMarks();
+					student = mark.get(i).getStudentName();
+				}
+				
+			}
+			
+		}
+		if(!student.equals("")) {
+			return "Highest Score for "+grade+" "+subject+" is: "+student + " - " +higestMarks+"%" ;
+		}else {
+			return "No entries!"; 
+		}
+		
 	}
 
 	@Override
-	public double getAvgMarks(Integer subjectID) {
-		// TODO Auto-generated method stub
-		return 0.0;
+	public String getAvgMarks(String grade, String subject) {
+		int count =0;
+		double total =0.0;
+		
+		for(int i=0;i<mark.size();i++) {
+			if(mark.get(i).getGrade() == grade && mark.get(i).getSubject() == subject) {
+			total+=mark.get(i).getMarks();
+			count++;
+			}
+		}
+		if(count>0 && total > 0.0) {
+			return "Average marks for "+grade+" "+subject+" is: "+ total/count ;
+		}else {
+			return "No entries!"; 
+		}
+		
+	
 	}
 
 }
