@@ -16,7 +16,9 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
+		System.out.println("=======================================================================");
 		System.out.println("Start gradeconsumer service");
+
 		serviceReference = context.getServiceReference(GradeService.class.getName());
 			
 		GradeService gradeservice = (GradeService) context.getService(serviceReference);
@@ -27,6 +29,7 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext context) throws Exception {
 
 		System.out.println("Stop the gradeconsumer service");
+		System.out.println("=======================================================================");
 		context.ungetService(serviceReference);
 		
 	}
@@ -36,7 +39,7 @@ public class Activator implements BundleActivator {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("\nStudent Management System v1.0\n");
+		System.out.println("\n************Student Management System v1.0************\n");
 		
 		System.out.println("1) Insert Grade ");
 		System.out.println("2) Update Grade ");
@@ -45,7 +48,7 @@ public class Activator implements BundleActivator {
 		
 		System.out.print("\nEnter the number : ");
 		input = Integer.parseInt(sc.nextLine().trim());
-		System.out.println("\n");
+		System.out.println("");
 		
 		if(input == 1) {
 			gradeService.insertGrades();

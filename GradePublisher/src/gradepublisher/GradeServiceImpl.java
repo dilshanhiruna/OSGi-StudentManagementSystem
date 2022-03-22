@@ -43,19 +43,22 @@ public class GradeServiceImpl implements GradeService {
 		String inputgrade;
 		
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.print("Please enter grade: ");
 		inputgrade = sc.nextLine();
 		
-		if(inputgrade == null) {
+		if(inputgrade != null) {
+			grades.add(new GradeModel(inputgrade));
+			
+			System.out.println(inputgrade+" is successfully inserted");
+			System.out.println("***********************************");
+		}else {
+		
 			System.out.println("\nInvalid input...");
-			System.out.print("Please enter grade: ");
-			inputgrade = sc.nextLine();
+//			System.out.print("Please enter grade: ");
+//			inputgrade = sc.nextLine();
+			insertGrades();
+		
 		}
-		
-		grades.add(new GradeModel(inputgrade));
-		
-		System.out.println(inputgrade+" is successfully inserted");
 	}
 
 	@Override
@@ -64,17 +67,21 @@ public class GradeServiceImpl implements GradeService {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.println("**********Grade List************");
 		for(int i=0;i<grades.size();i++) {
-			System.out.println(i +" - "+ grades.get(i).getGrade());
+			System.out.println((i+1) +" - "+ grades.get(i).getGrade());
 		}
-		System.out.println("Enter grade to update :");
+
+		System.out.print("Enter index to update :");
 		
 		int input = Integer.parseInt(sc.nextLine().trim());
 		
 		System.out.print("Please enter new grade: ");
 		inputgrade = sc.nextLine();
 		
-		grades.get(input).setGrade(inputgrade);
+		grades.get(input-1).setGrade(inputgrade);
+		System.out.println("Successfully Updated...");
+		System.out.println("***********************************");
 		
 	}
 
@@ -84,29 +91,32 @@ public class GradeServiceImpl implements GradeService {
 		GradeModel removed = null;
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.println("**********Grade List************");
 		for(int i=0;i<grades.size();i++) {
-			System.out.println(i +" - "+ grades.get(i).getGrade());
+			System.out.println((i+1) +" - "+ grades.get(i).getGrade());
 		}
 		
-		System.out.println("Enter the grade that wants to remove : ");
+		System.out.print("Enter the grade that wants to remove : ");
 		inputgrade = Integer.parseInt(sc.nextLine().trim());
 		
-		removed = grades.remove(inputgrade);
+		removed = grades.remove(inputgrade-1);
 		
 		if(removed != null) {
-			System.out.println("Marks Removed");
+			System.out.println("Grade Removed");
+			System.out.println("***********************************");
 		}else {
 			System.out.println("No entries!");
+			System.out.println("***********************************");
 		}
 		
 	}
 
 	@Override
 	public void listGrades() {
+		System.out.println("**********Grade List************");
 		for(int i=0;i<grades.size();i++) {
-			System.out.println(i +" - "+ grades.get(i).getGrade());
+			System.out.println((i+1) +" - "+ grades.get(i).getGrade());
 		}
-		
 	}
 
 }
