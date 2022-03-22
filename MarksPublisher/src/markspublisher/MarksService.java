@@ -1,14 +1,13 @@
 package markspublisher;
 
-import java.util.ArrayList;
 
 public interface MarksService {
 	
-	public void insertMarks(Integer studentID,Integer subjectID);
-	public void updateMarks(Integer studentID,Integer subjectID);
-	public void deleteMarks(Integer studentID,Integer subjectID);
-	public ArrayList<MarkModel> getMarks(Integer subjectID);
-	public String getHighestMarks(Integer subjectID);
-	public double getAvgMarks(Integer subjectID);
+	public void insertMarks(String student,String grade,String subject);
+	public void updateMarks(String studentID,String subjectID,String gradeID);
+	public void deleteMarks(String studentID,String subjectID,String gradeID);
+	public void getSubjectMarks(String grade, String subject);
+	public String getHighestMarks(String grade, String subject);
+	public String getAvgMarks(String grade, String subject);
 	
 }

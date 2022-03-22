@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 public interface GradeService {
 
-	public void getGrade();
+	public String getGrade();
+	public void listGrades();
 	public void insertGrades();
 	public void updateGrades();
 	public void deleteGrades();
-	//public String getHighestGrade();
-	//public String getlowestGrade();
 }

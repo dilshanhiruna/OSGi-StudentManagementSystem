@@ -26,7 +26,7 @@ public class Activator implements BundleActivator {
 	@Override
 	public void stop(BundleContext context) throws Exception {
 
-		System.out.println("Bye....");
+		System.out.println("Stop the gradeconsumer service");
 		context.ungetService(serviceReference);
 		
 	}
@@ -48,7 +48,20 @@ public class Activator implements BundleActivator {
 		System.out.println("\n");
 		
 		if(input == 1) {
-			//insertGrades();
+			gradeService.insertGrades();
+			menu(gradeService);
+		}else if(input == 2) {
+			gradeService.updateGrades();
+			menu(gradeService);
+		}else if(input == 3) {
+			gradeService.deleteGrades();
+			menu(gradeService);
+		}else if(input == 4) {
+			gradeService.listGrades();
+			menu(gradeService);
+		}else {
+			System.out.println("Invalid Input...");
+			menu(gradeService);
 		}
 	}
 
