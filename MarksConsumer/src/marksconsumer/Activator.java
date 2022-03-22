@@ -205,6 +205,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
 		}
@@ -234,6 +235,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
 		}
@@ -263,6 +265,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
 		}
