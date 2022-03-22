@@ -80,7 +80,6 @@ public class SubjectActivator implements BundleActivator {
 	public void directToService(int selectedService) {
 		if(selectedService==1) {
 			System.out.println("Please Select a grade:");
-			
 			String selectedGrade = gradeService.getGrade();
 			System.out.println("---------------------");
 			subjectPublish.addSubjects(selectedGrade);
@@ -90,13 +89,15 @@ public class SubjectActivator implements BundleActivator {
 		}
 		else if(selectedService==3) {
 			System.out.println("Please Select a grade:");
-			
 			String selectedGrade = gradeService.getGrade();
 			System.out.println("---------------------");
 			subjectPublish.viewSubjectsOfGrade(selectedGrade);;
 		}
 		else if(selectedService==4) {
-			subjectPublish.editSubjects();
+			System.out.println("Please Select a grade:");
+			String selectedGrade = gradeService.getGrade();
+			System.out.println("---------------------");
+			subjectPublish.editSubjects(selectedGrade);
 		}
 		else if(selectedService==5) {
 			subjectPublish.deleteSubjects();
