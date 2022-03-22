@@ -3,8 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SubjectPublisher
 Bundle-SymbolicName: SubjectPublisher
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: subjectpublisher.Activator
+Bundle-Activator: subjectpublisher.SubjectActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: SubjectPublisher
 Import-Package: org.osgi.framework;version="1.3.0"
-Bundle-ActivationPolicy: lazy
+Export-Package: subjectpublisher
