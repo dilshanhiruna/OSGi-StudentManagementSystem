@@ -24,23 +24,19 @@ public class SubjectActivator implements BundleActivator {
 		serviceReferenceGrade = bundleContext.getServiceReference(GradeService.class.getName());
 		gradeService = (GradeService) bundleContext.getService(serviceReferenceGrade);
 		
-		//get and direct user for a service
 		loopService();
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
-		System.out.println("bye");
+		System.out.println("Subject service consumer stopeed!");
 		bundleContext.ungetService(serviceReferenceSubject);
 		bundleContext.ungetService(serviceReferenceGrade);
 
 	}
 	
-	//method to loop service
+	//method to loop service(get and direct user for a service)
 	public void loopService() {
-		//display and get selected service
 		int selectedService = selectService();
-				
-		//direct to service
 		directToService(selectedService);
 	}
 	
@@ -63,11 +59,14 @@ public class SubjectActivator implements BundleActivator {
 		System.out.println("Press 3 to View all the subjects of a perticular grade");
 		System.out.println("Press 4 to Edit subject details");
 		System.out.println("Press 5 to Detele subjects");
+		System.out.println("Press 0 to Quit service");
 		System.out.println("------------------------------------------------------");
 
 
 		System.out.println("");
 		System.out.print("Please select the service you wish to continue: ");
+		System.out.println("");
+
 
 
 		
@@ -77,13 +76,12 @@ public class SubjectActivator implements BundleActivator {
 		return input;
 	}
 	
+	//method to direct user to the selected service
 	public void directToService(int selectedService) {
 		if(selectedService==1) {
 			System.out.println("Please Select a grade:");
 			
-			//store the grade
 			String selectedGrade = gradeService.getGrade();
-			
 			System.out.println("---------------------");
 			subjectPublish.addSubjects(selectedGrade);
 		}
@@ -93,9 +91,7 @@ public class SubjectActivator implements BundleActivator {
 		else if(selectedService==3) {
 			System.out.println("Please Select a grade:");
 			
-			//store the grade
 			String selectedGrade = gradeService.getGrade();
-			
 			System.out.println("---------------------");
 			subjectPublish.viewSubjectsOfGrade(selectedGrade);;
 		}
@@ -105,10 +101,15 @@ public class SubjectActivator implements BundleActivator {
 		else if(selectedService==5) {
 			subjectPublish.deleteSubjects();
 		}
+		else if(selectedService==0) {
+			System.out.println("-----------------------------");
+			System.out.println("Thank you... Have a nice day!");
+			System.out.println("-----------------------------");
+
+		}
 		else {
 			System.out.println("Please enter a valid service number");
 		}
-		//get and direct user for a service
 		loopService();
 	}
 

@@ -28,25 +28,42 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 	@Override
 	public void addSubjects(String grade) {
-//		System.out.println("To which grade do you want to add the subject? : ");
-//		
-		Scanner scan = new Scanner(System.in);
-//		String grade  = scan.next();
-		
-		System.out.println("Please enter the subject name : ");
-		String subjectName = scan.next();
-		
-		System.out.println("Please enter the subject medium : ");
-		String subjectMedium = scan.next();
-		
-		System.out.println("Please enter the teacher in charge for the subject: ");
-		String teacherInCharge = scan.next();
-		
-		//here I can create another teacher publisher/consumer to validate teachers
 
-		Subject newSubject = new Subject(grade, subjectName, subjectMedium, teacherInCharge);
-		subjects.add(newSubject);
-		System.out.println("Created new subject for grade "+grade+" Succesfully");
+		String wishToContinue = "y";
+		
+		while(!"n".equals(wishToContinue)) {
+			Scanner scan = new Scanner(System.in);
+			
+			System.out.print("Please enter the subject name : ");
+			String subjectName = scan.next();
+			
+			System.out.print("Please enter the subject medium : ");
+			String subjectMedium = scan.next();
+			
+			System.out.print("Please enter the teacher in charge for the subject: ");
+			String teacherInCharge = scan.next();
+			
+			//here I can create another teacher publisher/consumer to validate teachers
+			System.out.println("");
+
+			Subject newSubject = new Subject(grade, subjectName, subjectMedium, teacherInCharge);
+			subjects.add(newSubject);
+			System.out.println("-----------------------------------------------------");
+			System.out.println("Created new subject for grade "+grade+" Succesfully");
+			System.out.println("-----------------------------------------------------");
+
+			
+			System.out.println("");
+			
+			System.out.print("Do you wish to continue? (y/n): ");
+			wishToContinue = scan.next();
+			while(!"y".equals(wishToContinue)&&!"n".equals(wishToContinue)) {
+				System.out.print("Error! Please enter either 'y' or 'n' ");
+				System.out.print("");
+				System.out.print("Do you wish to continue? (y/n): ");
+				wishToContinue = scan.next();
+			}
+		}
 		
 		return;
 
@@ -55,7 +72,30 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 	@Override
 	public void viewAllSubjects() {
-		System.out.println("viewAllSubjects");	
+		String wishToContinue = "y";
+		Scanner scan = new Scanner(System.in);
+		
+		if(subjects.size()==0) {
+			System.out.println("No subjects are registered yet! ");
+			
+		}
+			
+		else {
+			subjects.forEach((subject) -> {
+				System.out.println(subjects.indexOf(subject) +" - "+ subject.getSubjectName());
+			});
+		}	
+		
+		System.out.println("");
+		
+		System.out.print("Enter 'x' to go back to the main menu: ");
+		wishToContinue = scan.next();
+
+		while(!"x".equals(wishToContinue)) {
+			System.out.print("Enter 'x' to go back to the main menu: ");
+			wishToContinue = scan.next();
+		}
+		return;		
 	}
 
 	@Override
@@ -104,6 +144,9 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 	@Override
 	public void viewSubjectsOfGrade(String grade) {
+		String wishToContinue = "y";
+		Scanner scan = new Scanner(System.in);
+
 		ArrayList<Subject> subjectsOfGivenGrade = new ArrayList<Subject>();
 		
 	
@@ -116,7 +159,6 @@ public class SubjectPublishImpl implements SubjectPublish {
 			
 		if(subjectsOfGivenGrade.size()==0) {
 			System.out.println("No subjects are registered for the selected grade!");
-			return;
 		}
 			
 		else {
@@ -124,5 +166,15 @@ public class SubjectPublishImpl implements SubjectPublish {
 				System.out.println(subjectsOfGivenGrade.indexOf(subject) +" - "+ subject.getSubjectName());
 			});
 		}
+		System.out.println("");
+		
+		System.out.print("Enter 'x' to go back to the main menu: ");
+		wishToContinue = scan.next();
+
+		while(!"x".equals(wishToContinue)) {
+			System.out.print("Enter 'x' to go back to the main menu: ");
+			wishToContinue = scan.next();
+		}
+		return;
 	 }
 }
