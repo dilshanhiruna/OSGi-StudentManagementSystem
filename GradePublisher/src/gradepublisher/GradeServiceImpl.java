@@ -27,7 +27,7 @@ public class GradeServiceImpl implements GradeService {
 		Scanner sc = new Scanner(System.in);
 		
 		for(int i=0;i<grades.size();i++) {
-			System.out.println(i +" - "+ grades.get(i));
+			System.out.println(i +" - "+ grades.get(i).getGrade());
 		}
 		    
 		System.out.println("Enter grade: ");
