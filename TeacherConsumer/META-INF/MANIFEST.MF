@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SubjectConsumer
-Bundle-SymbolicName: SubjectConsumer
+Bundle-Name: TeacherConsumer
+Bundle-SymbolicName: TeacherConsumer
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: subjectconsumer.SubjectActivator
+Bundle-Activator: teacherconsumer.TeacherActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: SubjectConsumer
 Import-Package: gradepublisher,

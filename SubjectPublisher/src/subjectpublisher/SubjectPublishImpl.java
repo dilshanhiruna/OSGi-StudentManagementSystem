@@ -32,7 +32,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 	
 	@Override
 	//this function is used to add new subjects for a given grade
-	public void addSubjects(String grade) {
+	public void addSubjects(String grade, String teacher) {
 		String wishToContinue = "y";
 		while(!"n".equals(wishToContinue)) {
 			Scanner scan = new Scanner(System.in);		
@@ -40,12 +40,10 @@ public class SubjectPublishImpl implements SubjectPublish {
 			String subjectName = scan.next();			
 			System.out.print("Please enter the subject medium : ");
 			String subjectMedium = scan.next();		
-			System.out.print("Please enter the teacher in charge for the subject: ");
-			String teacherInCharge = scan.next();
 		
 			//here I can create another teacher publisher/consumer to validate teachers
 			System.out.println("");
-			Subject newSubject = new Subject(grade, subjectName, subjectMedium, teacherInCharge);
+			Subject newSubject = new Subject(grade, subjectName, subjectMedium, teacher);
 			subjects.add(newSubject);
 			System.out.println("--------------------------------------------------------------------------------------");
 			System.out.println("Created new subject for grade '"+grade+"' named '"+subjectName+"' Succesfully");
@@ -60,7 +58,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 				wishToContinue = scan.next();
 			}
 		}
-		return;
+		viewSubjectsOfGrade(grade);
 	}
 
 	
@@ -138,7 +136,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 			System.out.println("Enter subject: ");
 			input = Integer.parseInt(sc.nextLine().trim());
 
-			return subjectsOfGivenGrade.get(input).getSubjectName();
+			return subjectsOfGivenGrade.get(--input).getSubjectName();
 		}	
 	}
 
@@ -206,8 +204,9 @@ public class SubjectPublishImpl implements SubjectPublish {
 	
 	@Override
 	//this method changes the grade of a subject at a given index
-	public void changeTeacherInCharge(ArrayList<Subject> subjects, int index) {
-		// TODO Auto-generated method stub
+	public void changeTeacherInCharge(ArrayList<Subject> subjects, int index, String newTeacher) {
+		subjects.get(index).setTeacherInCharge(newTeacher);;
+		viewSubjectsOfGrade(subjects.get(index).getGrade());		
 	}
 
 	
