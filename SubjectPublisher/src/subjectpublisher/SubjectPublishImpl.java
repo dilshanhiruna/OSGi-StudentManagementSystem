@@ -108,11 +108,6 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 		ArrayList<Subject> subjectsOfGivenGrade = printSubjectsOfGrade(grade);	
 			
-		if(subjectsOfGivenGrade.size()!=0) {
-			subjectsOfGivenGrade.forEach((subject) -> {
-				System.out.println(subjectsOfGivenGrade.indexOf(subject) +" - "+ subject.getSubjectName());
-			});
-		}
 		System.out.println("");
 		
 		System.out.print("Enter 'x' to go back to the main menu: ");
