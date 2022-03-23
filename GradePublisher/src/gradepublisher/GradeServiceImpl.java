@@ -27,13 +27,13 @@ public class GradeServiceImpl implements GradeService {
 		Scanner sc = new Scanner(System.in);
 		
 		for(int i=0;i<grades.size();i++) {
-			System.out.println(i +" - "+ grades.get(i).getGrade());
+			System.out.println(i+1 +" - "+ grades.get(i).getGrade());
 		}
 		    
 		System.out.println("Enter grade: ");
 		input = Integer.parseInt(sc.nextLine().trim());
 
-		return grades.get(input).getGrade();
+		return grades.get(--input).getGrade();
 
 	}
 	
