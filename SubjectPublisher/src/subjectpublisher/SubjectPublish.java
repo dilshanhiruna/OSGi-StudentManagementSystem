@@ -12,7 +12,7 @@ public interface SubjectPublish {
 	public void editSubjectName(ArrayList<Subject> subjects, int index);
 	public void editSubjectMedium(ArrayList<Subject> subjects, int index);
 	public void changeTeacherInCharge(ArrayList<Subject> subjects, int index);
-	public void changeTheGrade(ArrayList<Subject> subjects, int index);
+	public void changeTheGrade(ArrayList<Subject> subjects, int index, String newGrade);
 	public ArrayList<Subject> printSubjectsOfGrade(String grade);
 
 
