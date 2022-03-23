@@ -23,6 +23,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 		subjects.add(new Subject("Grade 4", "Tamil", "Sinhala", "Renuka"));
 		subjects.add(new Subject("Grade 4", "Design and Technology", "Sinhala", "Karunathilaka"));
 		subjects.add(new Subject("Grade 4", "Music", "Sinhala", "Mahendra"));
+		subjects.add(new Subject("Grade 4", "Math", "Sinhala", "Mahendra"));
 		
 	}
 
