@@ -1,5 +1,6 @@
 package subjectconsumer;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.osgi.framework.BundleActivator;
@@ -7,6 +8,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import gradepublisher.GradeService;
+import subjectpublisher.Subject;
 import subjectpublisher.SubjectPublish;
 
 public class SubjectActivator implements BundleActivator {
@@ -90,18 +92,118 @@ public class SubjectActivator implements BundleActivator {
 		else if(selectedService==3) {
 			System.out.println("Please Select a grade:");
 			String selectedGrade = gradeService.getGrade();
-			System.out.println("---------------------");
+			System.out.println("");
 			subjectPublish.viewSubjectsOfGrade(selectedGrade);;
 		}
 		else if(selectedService==4) {
 			System.out.println("Please Select a grade:");
 			String selectedGrade = gradeService.getGrade();
-			System.out.println("---------------------");
-			subjectPublish.editSubjects(selectedGrade);
+			System.out.println("");
+			
+			ArrayList<Subject> subjectsOfGivenGrade = subjectPublish.printSubjectsOfGrade(selectedGrade);
+			
+			if(subjectsOfGivenGrade.size()!=0) {
+				    
+				int index;
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Enter subject index to edit: ");
+				index = Integer.parseInt(sc.nextLine().trim());
+				index--;
+				
+				System.out.println("What do you want to do with " +subjectsOfGivenGrade.get(index).getSubjectName()+" ?: ");
+				System.out.println("");
+				System.out.println("Press 1 to Edit subject name");
+				System.out.println("Press 2 to Edit subject medium");
+				System.out.println("Press 3 to Edit subject teacher in charge");
+				System.out.println("Press 4 to Move subject to another grade");
+				
+				System.out.println("");
+				System.out.print("Please select the service you wish to continue: ");
+				System.out.println("");
+				int editService = Integer.parseInt(sc.nextLine().trim());
+
+				
+				switch (editService) {
+					case 1:
+						subjectPublish.editSubjectName(subjectsOfGivenGrade, index);
+						break;
+					case 2:
+						subjectPublish.editSubjectMedium(subjectsOfGivenGrade, index);
+						break;
+					case 3:
+						subjectPublish.changeTeacherInCharge(subjectsOfGivenGrade, index);
+						break;
+					case 4:				
+						Scanner scan = new Scanner(System.in);
+						String wishToProceed = "n";
+						String newSubjectGrade = null;
+						String newGrade = "";
+
+						while(!"y".equals(wishToProceed)) {
+							System.out.println("To which grade do you want to move the subject?");
+							newGrade = gradeService.getGrade();
+							System.out.println("");
+							System.out.print("Confirm change subject grade to "+newGrade+" (y/n): ");
+							wishToProceed = scan.next();
+							
+							while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
+								System.out.print("Error! Please enter either 'y' or 'n' ");
+								System.out.print("");
+								System.out.print("Confirm change subject grade to "+newGrade+" (y/n): ");
+								wishToProceed = scan.next();
+							}
+							
+						}
+						subjectPublish.changeTheGrade(subjectsOfGivenGrade, index, newGrade);
+
+						break;
+					default:
+						System.out.println("Error! Invalid number");
+						break;
+				
+				}
+
+			}		
 		}
 		else if(selectedService==5) {
-			subjectPublish.deleteSubjects();
+			System.out.println("Please Select a grade:");
+			String selectedGrade = gradeService.getGrade();
+			System.out.println("");
+			
+			ArrayList<Subject> subjectsOfGivenGrade = subjectPublish.printSubjectsOfGrade(selectedGrade);
+			
+			if(subjectsOfGivenGrade.size()!=0) {
+				    
+				String wishToProceed = "n";
+				String newSubjectGrade = null;
+				String newGrade = "";
+				int index = 0;
+
+				
+				while(!"y".equals(wishToProceed)) {
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Enter subject index to delete: ");
+					index = Integer.parseInt(sc.nextLine().trim());
+					index--;
+					System.out.println("");
+					System.out.print("Confirm delete subject? (y/n): ");
+					wishToProceed = sc.next();
+					
+					while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
+						System.out.print("Error! Please enter either 'y' or 'n' ");
+						System.out.print("");
+						System.out.print("Confirm delete subject? (y/n): ");
+						wishToProceed = sc.next();
+					}
+					
+				}
+				
+				subjectPublish.deleteSubject(subjectsOfGivenGrade, index);
+
+				
+			}
 		}
+
 		else if(selectedService==0) {
 			System.out.println("-----------------------------");
 			System.out.println("Thank you... Have a nice day!");

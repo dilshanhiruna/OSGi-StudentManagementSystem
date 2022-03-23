@@ -7,6 +7,10 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 	protected ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
+	//this index is used in deleteSubject method
+	int removeIndex = 0;
+
+	
 	public SubjectPublishImpl() {
 			
 		//add default marks to marks arrayList
@@ -17,11 +21,11 @@ public class SubjectPublishImpl implements SubjectPublish {
 		subjects.add(new Subject("Grade 2", "History", "English", "Karunathilaka"));
 		subjects.add(new Subject("Grade 2", "Religion", "English", "Mahendra"));
 		
-		subjects.add(new Subject("Grade 4", "Information Technology", "Sinhala", "Renuka"));
+		subjects.add(new Subject("Grade 4", "IT", "Sinhala", "Renuka"));
 		subjects.add(new Subject("Grade 4", "Health", "Sinhala", "Malkanthi"));
 		subjects.add(new Subject("Grade 4", "Geography", "Sinhala", "Senuki"));
 		subjects.add(new Subject("Grade 4", "Tamil", "Sinhala", "Renuka"));
-		subjects.add(new Subject("Grade 4", "Design and Technology", "Sinhala", "Karunathilaka"));
+		subjects.add(new Subject("Grade 4", "DT", "Sinhala", "Karunathilaka"));
 		subjects.add(new Subject("Grade 4", "Music", "Sinhala", "Mahendra"));
 		subjects.add(new Subject("Grade 4", "Math", "Sinhala", "Mahendra"));
 		
@@ -50,9 +54,9 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 			Subject newSubject = new Subject(grade, subjectName, subjectMedium, teacherInCharge);
 			subjects.add(newSubject);
-			System.out.println("-----------------------------------------------------");
-			System.out.println("Created new subject for grade "+grade+" named "+subjectName+" Succesfully");
-			System.out.println("-----------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------");
+			System.out.println("Created new subject for grade '"+grade+"' named '"+subjectName+"' Succesfully");
+			System.out.println("--------------------------------------------------------------------------------------");
 
 			
 			System.out.println("");
@@ -68,8 +72,6 @@ public class SubjectPublishImpl implements SubjectPublish {
 		}
 		
 		return;
-
-		
 	}
 
 	@Override
@@ -84,9 +86,26 @@ public class SubjectPublishImpl implements SubjectPublish {
 		}
 			
 		else {
+			System.out.println("------------------------------------------------------------------");
+			System.out.println(
+					String.format("|%-7s", "Index")
+					+String.format("|%-10s", "Grade")
+					+String.format("|%-15s", "Subject Name")
+					+String.format("|%-10s", "Medium")
+					+String.format("|%-18s|", "Teacher in Charge")
+				);
+			System.out.println("------------------------------------------------------------------");
 			subjects.forEach((subject) -> {
-				System.out.println(subjects.indexOf(subject) +" - "+ subject.getSubjectName());
+				System.out.println(
+					String.format("|%-7s", subjects.indexOf(subject)+1)
+					+String.format("|%-10s", subject.getGrade())
+					+String.format("|%-15s", subject.getSubjectName())
+					+String.format("|%-10s", subject.getSubjectMedium())
+					+String.format("|%-18s|", subject.getTeacherInCharge())
+				);
 			});
+			System.out.println("------------------------------------------------------------------");
+
 		}	
 		
 		System.out.println("");
@@ -109,11 +128,6 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 		ArrayList<Subject> subjectsOfGivenGrade = printSubjectsOfGrade(grade);	
 			
-		if(subjectsOfGivenGrade.size()!=0) {
-			subjectsOfGivenGrade.forEach((subject) -> {
-				System.out.println(subjectsOfGivenGrade.indexOf(subject) +" - "+ subject.getSubjectName());
-			});
-		}
 		System.out.println("");
 		
 		System.out.print("Enter 'x' to go back to the main menu: ");
@@ -151,53 +165,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 	@Override
 	public void editSubjects(String grade) {
-		ArrayList<Subject> subjectsOfGivenGrade = printSubjectsOfGrade(grade);
 		
-		if(subjectsOfGivenGrade.size()!=0) {
-			    
-			int index;
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter subject: ");
-			index = Integer.parseInt(sc.nextLine().trim());
-			
-			System.out.println("What do you want to do with " +subjectsOfGivenGrade.get(index).getSubjectName()+" ?: ");
-			System.out.println("");
-			System.out.println("Press 1 to Edit subject name");
-			System.out.println("Press 2 to Edit subject medium");
-			System.out.println("Press 3 to Edit subject teacher in charge");
-			System.out.println("Press 4 to Move subject to another grade");
-			
-			System.out.println("");
-			System.out.print("Please select the service you wish to continue: ");
-			System.out.println("");
-			int editService = Integer.parseInt(sc.nextLine().trim());
-
-			
-			switch (editService) {
-				case 1:
-					editSubjectName(subjectsOfGivenGrade, index);
-					break;
-				case 2:
-					editSubjectMedium(subjectsOfGivenGrade, index);
-					break;
-				case 3:
-					changeTeacherInCharge(subjectsOfGivenGrade, index);
-					break;
-				case 4:
-					changeTheGrade(subjectsOfGivenGrade, index);
-					break;
-				default:
-					System.out.println("Error! Invalid number");
-					break;
-			
-			}
-
-		}
-	}
-
-	@Override
-	public void deleteSubjects() {
-		System.out.println("deleteSubjects");	
 	}
 
 	@Override
@@ -222,7 +190,8 @@ public class SubjectPublishImpl implements SubjectPublish {
 			
 		}
 		subjects.get(index).setSubjectName(newSubjectName);
-		return;
+		viewSubjectsOfGrade(subjects.get(index).getGrade());		
+;
 	
 	}
 
@@ -247,7 +216,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 			
 		}
 		subjects.get(index).setSubjectMedium(newSubjectMeduim);
-		return;		
+		viewSubjectsOfGrade(subjects.get(index).getGrade());		
 	}
 
 	@Override
@@ -257,11 +226,15 @@ public class SubjectPublishImpl implements SubjectPublish {
 	}
 
 	@Override
-	public void changeTheGrade(ArrayList<Subject> subjects, int index) {
-		// TODO Auto-generated method stub
+	public void changeTheGrade(ArrayList<Subject> subjects, int index, String newGrade) {
 		
+		subjects.get(index).setGrade(newGrade);
+		viewSubjectsOfGrade(newGrade);		
+;	
 	}
 
+	//this function prints all the subjects of a given grade
+	//(used internally to reuse code)
 	@Override
 	public ArrayList<Subject> printSubjectsOfGrade(String grade) {
 		ArrayList<Subject> subjectsOfGivenGrade = new ArrayList<Subject>();
@@ -279,13 +252,54 @@ public class SubjectPublishImpl implements SubjectPublish {
 			return subjectsOfGivenGrade;
 
 		}		
-		else {
+		else {	
+			System.out.println("------------------------------------------------------------------");
+			System.out.println(
+					String.format("|%-7s", "Index")
+					+String.format("|%-10s", "Grade")
+					+String.format("|%-15s", "Subject Name")
+					+String.format("|%-10s", "Medium")
+					+String.format("|%-18s|", "Teacher in Charge")
+				);
+			System.out.println("------------------------------------------------------------------");
 			subjectsOfGivenGrade.forEach((subject) -> {
-				System.out.println(subjectsOfGivenGrade.indexOf(subject) +" - "+ subject.getSubjectName());
+				System.out.println(
+					String.format("|%-7s", subjectsOfGivenGrade.indexOf(subject)+1)
+					+String.format("|%-10s", subject.getGrade())
+					+String.format("|%-15s", subject.getSubjectName())
+					+String.format("|%-10s", subject.getSubjectMedium())
+					+String.format("|%-18s|", subject.getTeacherInCharge())
+				);
 			});
+			System.out.println("------------------------------------------------------------------");
 			
 			return subjectsOfGivenGrade;
 		}
+	}
+	
+	//function to delete a subject
+	@Override
+	public void deleteSubject(ArrayList<Subject> subjectsList, int index) {
+		Subject subjectToRemove = subjectsList.get(index);
+		String subjectToRemoveName = subjectToRemove.getSubjectName();
+		String subjectToRemoveGrade = subjectToRemove.getGrade();
+
+		subjects.forEach((subject) -> {
+			String gradeOfSubject = subject.getGrade();
+			if(subjectToRemoveName.equals(subject.getSubjectName())&&subjectToRemoveGrade.equals(subject.getGrade())){
+				removeIndex = subjects.indexOf(subject);
+			}
+		});
+		
+		subjects.remove(removeIndex);	
+		System.out.println("");
+		System.out.println("Deleted subject '"+subjectToRemoveName+"' successfully!");
+		System.out.println("");
+
+
+		viewSubjectsOfGrade(subjectToRemoveGrade);		
+
+
 	}
 }
 
