@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import databaseservice.Database;
@@ -31,6 +32,14 @@ public class MarksServiceImpl implements MarksService {
 		
 		//add default marks to marks arrayList
 		mark.add(new Marks("Rochell","Grade 4","Math",90));
+		mark.add(new Marks("Rochell","Grade 4","Science",88));
+		mark.add(new Marks("Rochell","Grade 4","Music",75));
+		mark.add(new Marks("Rochell","Grade 4","English",95));
+		mark.add(new Marks("Rochell","Grade 4","IT",80));
+		mark.add(new Marks("Rochell","Grade 4","Health",58));
+		mark.add(new Marks("Rochell","Grade 4","Art",60));
+		mark.add(new Marks("Rochell","Grade 4","Sinhala",55));
+		
 		mark.add(new Marks("Tom","Grade 4","Math",88));
 		mark.add(new Marks("Haaiq","Grade 4","Math",60));
 		mark.add(new Marks("Katie","Grade 4","Math",67));
@@ -149,12 +158,30 @@ public class MarksServiceImpl implements MarksService {
 			}
 		}
 		if(count>0 && total > 0.0) {
-			return "Average marks for "+grade+" "+subject+" is: "+ total/count ;
+			return "Average marks for "+grade+" "+subject+" is: "+ String.format("%.2f", total/count) ;
 		}else {
 			return "No entries!"; 
 		}
 		
 	
+	}
+
+	@Override
+	public HashMap<String, Double> getStudentMarks(String student, String grade) {
+		
+		HashMap<String, Double> studentMarks = new HashMap<String, Double>();
+		
+		for(int i=0;i<mark.size();i++) {
+			
+			if(mark.get(i).getStudentName().equals(student)  && mark.get(i).getGrade().equals(grade)) {
+				
+				studentMarks.put(mark.get(i).getSubject(),(double)mark.get(i).getMarks());
+	
+			}
+			
+		}
+		
+		return studentMarks;
 	}
 
 }
