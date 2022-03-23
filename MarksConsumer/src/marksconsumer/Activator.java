@@ -92,6 +92,10 @@ public class Activator implements BundleActivator {
 			//store the subject
 			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
+			if(selectedSubject.equals("nothing")) {
+				menu(marksService,gradeService,studentService,subjectService);
+			}
+			
 			System.out.println("---------------------");
 			System.out.println("[GRADE: "+selectedGrade+"] "+"[STUDENT: "+selectedStudent+"]"+" [SUBJECT: "+selectedSubject+"]\n");
 						
