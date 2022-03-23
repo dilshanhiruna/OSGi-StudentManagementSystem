@@ -9,4 +9,5 @@ public interface GradeService {
 	public void insertGrades();
 	public void updateGrades();
 	public void deleteGrades();
+	public void exit();
 }

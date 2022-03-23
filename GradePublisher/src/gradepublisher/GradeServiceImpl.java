@@ -118,5 +118,8 @@ public class GradeServiceImpl implements GradeService {
 			System.out.println((i+1) +" - "+ grades.get(i).getGrade());
 		}
 	}
+	public void exit() {
+		System.out.println("....Exit...");
+	}
 
 }

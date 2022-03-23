@@ -45,6 +45,7 @@ public class Activator implements BundleActivator {
 		System.out.println("2) Update Grade ");
 		System.out.println("3) Delete Grade ");
 		System.out.println("4) List the Grade");
+		System.out.println("5) Exit");
 		
 		System.out.print("\nEnter the number : ");
 		input = Integer.parseInt(sc.nextLine().trim());
@@ -62,6 +63,8 @@ public class Activator implements BundleActivator {
 		}else if(input == 4) {
 			gradeService.listGrades();
 			menu(gradeService);
+		}else if(input == 5) {
+			gradeService.exit();
 		}else {
 			System.out.println("Invalid Input...");
 			menu(gradeService);
