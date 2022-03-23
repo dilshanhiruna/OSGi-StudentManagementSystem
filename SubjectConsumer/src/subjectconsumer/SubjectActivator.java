@@ -53,8 +53,6 @@ public class SubjectActivator implements BundleActivator {
 		
 		System.out.println("");
 		System.out.println("Here are the services available to you: ");
-		System.out.println("");
-
 		System.out.println("------------------------------------------------------");
 		System.out.println("Press 1 to Add new subject");
 		System.out.println("Press 2 to View all the subjects of the school");
@@ -81,6 +79,7 @@ public class SubjectActivator implements BundleActivator {
 	//method to direct user to the selected service
 	public void directToService(int selectedService) {
 		if(selectedService==1) {
+			System.out.println("");
 			System.out.println("Please Select a grade:");
 			String selectedGrade = gradeService.getGrade();
 			System.out.println("---------------------");
@@ -90,12 +89,14 @@ public class SubjectActivator implements BundleActivator {
 			subjectPublish.viewAllSubjects();
 		}
 		else if(selectedService==3) {
+			System.out.println("");
 			System.out.println("Please Select a grade:");
 			String selectedGrade = gradeService.getGrade();
 			System.out.println("");
 			subjectPublish.viewSubjectsOfGrade(selectedGrade);;
 		}
 		else if(selectedService==4) {
+			System.out.println("");
 			System.out.println("Please Select a grade:");
 			String selectedGrade = gradeService.getGrade();
 			System.out.println("");
@@ -110,7 +111,7 @@ public class SubjectActivator implements BundleActivator {
 				index = Integer.parseInt(sc.nextLine().trim());
 				index--;
 				
-				System.out.println("What do you want to do with " +subjectsOfGivenGrade.get(index).getSubjectName()+" ?: ");
+				System.out.println("What do you want to do with" +subjectsOfGivenGrade.get(index).getSubjectName()+" ?: ");
 				System.out.println("");
 				System.out.println("Press 1 to Edit subject name");
 				System.out.println("Press 2 to Edit subject medium");
@@ -143,14 +144,20 @@ public class SubjectActivator implements BundleActivator {
 							System.out.println("To which grade do you want to move the subject?");
 							newGrade = gradeService.getGrade();
 							System.out.println("");
-							System.out.print("Confirm change subject grade to "+newGrade+" (y/n): ");
+							System.out.print("Confirm change subject grade to "+newGrade+" (y/n) | press x to terminate : ");
 							wishToProceed = scan.next();
+							if(wishToProceed.equals("x")) {
+								loopService();
+							}
 							
 							while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
 								System.out.print("Error! Please enter either 'y' or 'n' ");
 								System.out.print("");
-								System.out.print("Confirm change subject grade to "+newGrade+" (y/n): ");
+								System.out.print("Confirm change subject grade to "+newGrade+" (y/n) | press x to terminate : ");
 								wishToProceed = scan.next();
+								if(wishToProceed.equals("x")) {
+									loopService();
+								}
 							}
 							
 						}
@@ -166,6 +173,7 @@ public class SubjectActivator implements BundleActivator {
 			}		
 		}
 		else if(selectedService==5) {
+			System.out.println("");
 			System.out.println("Please Select a grade:");
 			String selectedGrade = gradeService.getGrade();
 			System.out.println("");
@@ -186,14 +194,20 @@ public class SubjectActivator implements BundleActivator {
 					index = Integer.parseInt(sc.nextLine().trim());
 					index--;
 					System.out.println("");
-					System.out.print("Confirm delete subject? (y/n): ");
+					System.out.print("Confirm delete subject? (y/n) | press x to terminate : ");
 					wishToProceed = sc.next();
+					if(wishToProceed.equals("x")) {
+						loopService();
+					}
 					
 					while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
 						System.out.print("Error! Please enter either 'y' or 'n' ");
 						System.out.print("");
-						System.out.print("Confirm delete subject? (y/n): ");
+						System.out.print("Confirm delete subject? (y/n) | press x to terminate : ");
 						wishToProceed = sc.next();
+						if(wishToProceed.equals("x")) {
+							loopService();
+						}
 					}
 					
 				}

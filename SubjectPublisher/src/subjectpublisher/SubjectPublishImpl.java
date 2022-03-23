@@ -178,14 +178,20 @@ public class SubjectPublishImpl implements SubjectPublish {
 		while(!"y".equals(wishToProceed)) {
 			System.out.print("Please enter the new name: ");
 			newSubjectName = scan.next();
-			System.out.print("Confirm change subject name from "+subjects.get(index).getSubjectName()+" to "+newSubjectName+" (y/n): ");
+			System.out.print("Confirm change subject name from '"+subjects.get(index).getSubjectName()+"' to '"+newSubjectName+"' (y/n) | press x to terminate :");
 			wishToProceed = scan.next();
+			if(wishToProceed.equals("x")) {
+				return;
+			}
 			
 			while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
 				System.out.print("Error! Please enter either 'y' or 'n' ");
 				System.out.print("");
-				System.out.print("Confirm change subject name "+subjects.get(index).getSubjectName()+" to "+newSubjectName+" (y/n): ");
+				System.out.print("Confirm change subject name '"+subjects.get(index).getSubjectName()+"' to '"+newSubjectName+"' (y/n) | press x to terminate : ");
 				wishToProceed = scan.next();
+				if(wishToProceed.equals("x")) {
+					return;
+				}
 			}
 			
 		}
@@ -204,14 +210,20 @@ public class SubjectPublishImpl implements SubjectPublish {
 		while(!"y".equals(wishToProceed)) {
 			System.out.print("Please enter the new medium: ");
 			newSubjectMeduim = scan.next();
-			System.out.print("Confirm change subject medium from "+subjects.get(index).getSubjectMedium()+" to "+newSubjectMeduim+" (y/n): ");
+			System.out.print("Confirm change subject medium from '"+subjects.get(index).getSubjectMedium()+"' to '"+newSubjectMeduim+"' (y/n) | press x to terminate :");
 			wishToProceed = scan.next();
+			if(wishToProceed.equals("x")) {
+				return;
+			}
 			
 			while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
 				System.out.print("Error! Please enter either 'y' or 'n' ");
 				System.out.print("");
-				System.out.print("Confirm change subject medium from "+subjects.get(index).getSubjectMedium()+" to "+newSubjectMeduim+" (y/n): ");
+				System.out.print("Confirm change subject medium from '"+subjects.get(index).getSubjectMedium()+"' to '"+newSubjectMeduim+"' (y/n) | press x to terminate : ");
 				wishToProceed = scan.next();
+				if(wishToProceed.equals("x")) {
+					return;
+				}
 			}
 			
 		}
