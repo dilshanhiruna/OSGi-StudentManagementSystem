@@ -6,10 +6,10 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: marksconsumer.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: MarksConsumer
-Import-Package: grdp,
+Import-Package: gradepublisher,
  markspublisher,
  org.osgi.framework;version="1.3.0",
  stup,
- subp
+ subjectpublisher
 Bundle-ActivationPolicy: lazy
 Export-Package: marksconsumer

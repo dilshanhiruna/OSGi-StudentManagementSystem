@@ -1,14 +1,15 @@
 package marksconsumer;
 
-import grdp.GradeInterface;
+
+import gradepublisher.GradeService;
 import java.util.Scanner;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import stup.StudentInterface;
-import subp.SubjectInterface;
 import markspublisher.MarksService;
+import subjectpublisher.SubjectPublish;
 
 public class Activator implements BundleActivator {
 
@@ -17,19 +18,19 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		System.out.println("Marks Consumer Starts");
 		sr1 = context.getServiceReference(MarksService.class.getName());
-		sr2 = context.getServiceReference(GradeInterface.class.getName());
+		sr2 = context.getServiceReference(GradeService.class.getName());
 		sr3 = context.getServiceReference(StudentInterface.class.getName());
-		sr4 = context.getServiceReference(SubjectInterface.class.getName());
+		sr4 = context.getServiceReference(SubjectPublish.class.getName());
 		
 		if(sr1 != null  || sr2 != null || sr3 != null || sr4 != null ) {
 			@SuppressWarnings("unchecked")
 			MarksService marksService = (MarksService)context.getService(sr1);
 			@SuppressWarnings("unchecked")
-			GradeInterface gradeService = (GradeInterface) context.getService(sr2);
+			GradeService gradeService = (GradeService) context.getService(sr2);
 			@SuppressWarnings("unchecked")
 			StudentInterface studentService = (StudentInterface) context.getService(sr3);
 			@SuppressWarnings("unchecked")
-			SubjectInterface subjectService = (SubjectInterface) context.getService(sr4);
+			SubjectPublish subjectService = (SubjectPublish) context.getService(sr4);
 			
 			menu(marksService,gradeService,studentService,subjectService);
 			
@@ -46,7 +47,7 @@ public class Activator implements BundleActivator {
 		context.ungetService(sr4);
 	}
 	
-	public void menu(MarksService marksService,GradeInterface gradeService,StudentInterface studentService,SubjectInterface subjectService) {
+	public void menu(MarksService marksService,GradeService gradeService,StudentInterface studentService,SubjectPublish subjectService) {
 		
 		int input;
 		
@@ -60,8 +61,9 @@ public class Activator implements BundleActivator {
 		System.out.println("4) Get Marks");
 		System.out.println("5) Get Higest Marks");
 		System.out.println("6) Get Average Marks");
+		System.out.println("7) Exit");
 		
-		System.out.println("Enter (1/2/3/4/5/6): ");
+		System.out.println("Enter (1/2/3/4/5/6/7): ");
 		input = Integer.parseInt(sc.next().trim());
 		System.out.println("\n");
 		
@@ -88,7 +90,7 @@ public class Activator implements BundleActivator {
 			System.out.println("Please Select a subject;");
 			
 			//store the subject
-			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
 			System.out.println("---------------------");
 			System.out.println("[GRADE: "+selectedGrade+"] "+"[STUDENT: "+selectedStudent+"]"+" [SUBJECT: "+selectedSubject+"]\n");
@@ -126,7 +128,7 @@ public class Activator implements BundleActivator {
 			System.out.println("Please Select a subject;");
 			
 			//store the subject
-			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
 			System.out.println("---------------------");
 			System.out.println("[GRADE: "+selectedGrade+"] "+"[STUDENT: "+selectedStudent+"]"+" [SUBJECT: "+selectedSubject+"]\n");
@@ -163,7 +165,7 @@ public class Activator implements BundleActivator {
 			System.out.println("Please Select a subject;");
 			
 			//store the subject
-			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
 			System.out.println("---------------------");
 			System.out.println("[GRADE: "+selectedGrade+"] "+"[STUDENT: "+selectedStudent+"]"+" [SUBJECT: "+selectedSubject+"]\n");
@@ -194,7 +196,7 @@ public class Activator implements BundleActivator {
 			System.out.println("Please Select a subject:");
 			
 			//store the subject
-			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
 
 			System.out.println("---------------------");
@@ -205,6 +207,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
 		}
@@ -224,7 +227,7 @@ public class Activator implements BundleActivator {
 			System.out.println("Please Select a subject:");
 			
 			//store the subject
-			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
 
 			System.out.println("---------------------");
@@ -234,6 +237,7 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
 		}
@@ -253,7 +257,7 @@ public class Activator implements BundleActivator {
 			System.out.println("Please Select a subject:");
 			
 			//store the subject
-			String selectedSubject= subjectService.getSubjects(selectedGrade);
+			String selectedSubject= subjectService.getSubjectsOfGrade(selectedGrade);
 			
 
 			System.out.println("---------------------");
@@ -263,8 +267,16 @@ public class Activator implements BundleActivator {
 			
 			System.out.println("---------------------");
 			
+			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
+		}
+		else if(input == 7) {
+			System.out.println("Exit");
+		}
+		else {
+			System.out.println("Invalid Input!");
+			menu(marksService,gradeService,studentService,subjectService);
 		}
 		
 	}
