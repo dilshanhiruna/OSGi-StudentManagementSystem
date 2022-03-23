@@ -60,8 +60,9 @@ public class Activator implements BundleActivator {
 		System.out.println("4) Get Marks");
 		System.out.println("5) Get Higest Marks");
 		System.out.println("6) Get Average Marks");
+		System.out.println("7) Exit");
 		
-		System.out.println("Enter (1/2/3/4/5/6): ");
+		System.out.println("Enter (1/2/3/4/5/6/7): ");
 		input = Integer.parseInt(sc.next().trim());
 		System.out.println("\n");
 		
@@ -268,6 +269,13 @@ public class Activator implements BundleActivator {
 			//display the menu again
 			menu(marksService,gradeService,studentService,subjectService);
 			
+		}
+		else if(input == 7) {
+			System.out.println("Exit");
+		}
+		else {
+			System.out.println("Invalid Input!");
+			menu(marksService,gradeService,studentService,subjectService);
 		}
 		
 	}
