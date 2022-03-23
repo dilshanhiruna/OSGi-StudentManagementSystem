@@ -111,7 +111,7 @@ public class SubjectActivator implements BundleActivator {
 				index = Integer.parseInt(sc.nextLine().trim());
 				index--;
 				
-				System.out.println("What do you want to do with" +subjectsOfGivenGrade.get(index).getSubjectName()+" ?: ");
+				System.out.println("What do you want to do with " +subjectsOfGivenGrade.get(index).getSubjectName()+"?: ");
 				System.out.println("");
 				System.out.println("Press 1 to Edit subject name");
 				System.out.println("Press 2 to Edit subject medium");

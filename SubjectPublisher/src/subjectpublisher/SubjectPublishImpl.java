@@ -6,13 +6,11 @@ import java.util.Scanner;
 public class SubjectPublishImpl implements SubjectPublish {
 
 	protected ArrayList<Subject> subjects = new ArrayList<Subject>();
-	
 	//this index is used in deleteSubject method
 	int removeIndex = 0;
-
+	
 	
 	public SubjectPublishImpl() {
-			
 		//add default marks to marks arrayList
 		subjects.add(new Subject("Grade 2", "Mathematics", "English", "Renuka"));
 		subjects.add(new Subject("Grade 2", "Science", "English", "Malkanthi"));
@@ -28,39 +26,31 @@ public class SubjectPublishImpl implements SubjectPublish {
 		subjects.add(new Subject("Grade 4", "DT", "Sinhala", "Karunathilaka"));
 		subjects.add(new Subject("Grade 4", "Music", "Sinhala", "Mahendra"));
 		subjects.add(new Subject("Grade 4", "Math", "Sinhala", "Mahendra"));
-		
 	}
 
+	
+	
 	@Override
 	//this function is used to add new subjects for a given grade
 	public void addSubjects(String grade) {
-
 		String wishToContinue = "y";
-		
 		while(!"n".equals(wishToContinue)) {
-			Scanner scan = new Scanner(System.in);
-			
+			Scanner scan = new Scanner(System.in);		
 			System.out.print("Please enter the subject name : ");
-			String subjectName = scan.next();
-			
+			String subjectName = scan.next();			
 			System.out.print("Please enter the subject medium : ");
-			String subjectMedium = scan.next();
-			
+			String subjectMedium = scan.next();		
 			System.out.print("Please enter the teacher in charge for the subject: ");
 			String teacherInCharge = scan.next();
-			
+		
 			//here I can create another teacher publisher/consumer to validate teachers
 			System.out.println("");
-
 			Subject newSubject = new Subject(grade, subjectName, subjectMedium, teacherInCharge);
 			subjects.add(newSubject);
 			System.out.println("--------------------------------------------------------------------------------------");
 			System.out.println("Created new subject for grade '"+grade+"' named '"+subjectName+"' Succesfully");
 			System.out.println("--------------------------------------------------------------------------------------");
-
-			
 			System.out.println("");
-			
 			System.out.print("Do you wish to continue? (y/n): ");
 			wishToContinue = scan.next();
 			while(!"y".equals(wishToContinue)&&!"n".equals(wishToContinue)) {
@@ -70,21 +60,19 @@ public class SubjectPublishImpl implements SubjectPublish {
 				wishToContinue = scan.next();
 			}
 		}
-		
 		return;
 	}
 
+	
+	
 	@Override
 	//this function displays all the subjects in the school
 	public void viewAllSubjects() {
 		String wishToContinue = "y";
-		Scanner scan = new Scanner(System.in);
-		
+		Scanner scan = new Scanner(System.in);	
 		if(subjects.size()==0) {
-			System.out.println("No subjects are registered yet! ");
-			
-		}
-			
+			System.out.println("No subjects are registered yet! ");		
+		}		
 		else {
 			System.out.println("------------------------------------------------------------------");
 			System.out.println(
@@ -105,14 +93,10 @@ public class SubjectPublishImpl implements SubjectPublish {
 				);
 			});
 			System.out.println("------------------------------------------------------------------");
-
-		}	
-		
-		System.out.println("");
-		
+		}		
+		System.out.println("");	
 		System.out.print("Enter 'x' to go back to the main menu: ");
 		wishToContinue = scan.next();
-
 		while(!"x".equals(wishToContinue)) {
 			System.out.print("Enter 'x' to go back to the main menu: ");
 			wishToContinue = scan.next();
@@ -120,19 +104,17 @@ public class SubjectPublishImpl implements SubjectPublish {
 		return;		
 	}
 	
+	
+	
 	@Override
 	//this function displays all the subjects in a given grade
 	public void viewSubjectsOfGrade(String grade) {
 		String wishToContinue = "y";
 		Scanner scan = new Scanner(System.in);
-
-		ArrayList<Subject> subjectsOfGivenGrade = printSubjectsOfGrade(grade);	
-			
+		ArrayList<Subject> subjectsOfGivenGrade = printSubjectsOfGrade(grade);		
 		System.out.println("");
-		
 		System.out.print("Enter 'x' to go back to the main menu: ");
 		wishToContinue = scan.next();
-
 		while(!"x".equals(wishToContinue)) {
 			System.out.print("Enter 'x' to go back to the main menu: ");
 			wishToContinue = scan.next();
@@ -141,15 +123,14 @@ public class SubjectPublishImpl implements SubjectPublish {
 	 }
 
 
+	
 	@Override
 	//this function displays all the subjects of a given grade and returns the selected subject name
 	//(used in marks consumer)
 	public String getSubjectsOfGrade(String grade) {
 		ArrayList<Subject> subjectsOfGivenGrade = printSubjectsOfGrade(grade);
-	
 		if(subjectsOfGivenGrade.size()==0) {
 			return "nothing";
-
 		}
 		else {	    
 			int input;
@@ -158,23 +139,17 @@ public class SubjectPublishImpl implements SubjectPublish {
 			input = Integer.parseInt(sc.nextLine().trim());
 
 			return subjectsOfGivenGrade.get(input).getSubjectName();
-		}
+		}	
+	}
+
 	
-		
-	}
-
+	
 	@Override
-	public void editSubjects(String grade) {
-		
-	}
-
-	@Override
+	//this method edits the subject name at a given index
 	public void editSubjectName(ArrayList<Subject> subjects, int index) {
-		
 		Scanner scan = new Scanner(System.in);
 		String wishToProceed = "n";
 		String newSubjectName = null;
-
 		while(!"y".equals(wishToProceed)) {
 			System.out.print("Please enter the new name: ");
 			newSubjectName = scan.next();
@@ -183,7 +158,6 @@ public class SubjectPublishImpl implements SubjectPublish {
 			if(wishToProceed.equals("x")) {
 				return;
 			}
-			
 			while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
 				System.out.print("Error! Please enter either 'y' or 'n' ");
 				System.out.print("");
@@ -192,21 +166,20 @@ public class SubjectPublishImpl implements SubjectPublish {
 				if(wishToProceed.equals("x")) {
 					return;
 				}
-			}
-			
+			}			
 		}
 		subjects.get(index).setSubjectName(newSubjectName);
-		viewSubjectsOfGrade(subjects.get(index).getGrade());		
-;
-	
+		viewSubjectsOfGrade(subjects.get(index).getGrade());
 	}
 
+	
+	
 	@Override
+	//this method edits the subject medium at a given index
 	public void editSubjectMedium(ArrayList<Subject> subjects, int index) {
 		Scanner scan = new Scanner(System.in);
 		String wishToProceed = "n";
 		String newSubjectMeduim = null;
-
 		while(!"y".equals(wishToProceed)) {
 			System.out.print("Please enter the new medium: ");
 			newSubjectMeduim = scan.next();
@@ -215,7 +188,6 @@ public class SubjectPublishImpl implements SubjectPublish {
 			if(wishToProceed.equals("x")) {
 				return;
 			}
-			
 			while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
 				System.out.print("Error! Please enter either 'y' or 'n' ");
 				System.out.print("");
@@ -225,26 +197,30 @@ public class SubjectPublishImpl implements SubjectPublish {
 					return;
 				}
 			}
-			
 		}
 		subjects.get(index).setSubjectMedium(newSubjectMeduim);
 		viewSubjectsOfGrade(subjects.get(index).getGrade());		
 	}
 
+	
+	
 	@Override
+	//this method changes the grade of a subject at a given index
 	public void changeTeacherInCharge(ArrayList<Subject> subjects, int index) {
 		// TODO Auto-generated method stub
-		
 	}
 
+	
+	
 	@Override
-	public void changeTheGrade(ArrayList<Subject> subjects, int index, String newGrade) {
-		
+	//this method changes the grade of a subject at a given index
+	public void changeTheGrade(ArrayList<Subject> subjects, int index, String newGrade) {	
 		subjects.get(index).setGrade(newGrade);
-		viewSubjectsOfGrade(newGrade);		
-;	
+		viewSubjectsOfGrade(newGrade);	
 	}
 
+	
+	
 	//this function prints all the subjects of a given grade
 	//(used internally to reuse code)
 	@Override
@@ -255,14 +231,11 @@ public class SubjectPublishImpl implements SubjectPublish {
 			String gradeOfSubject = subject.getGrade();
 			if(gradeOfSubject==grade) {
 				subjectsOfGivenGrade.add(subject);
-				
 			}
 		});
- 
 		if(subjectsOfGivenGrade.size()==0) {
 			System.out.println("No subjects are registered for the selected grade!");
 			return subjectsOfGivenGrade;
-
 		}		
 		else {	
 			System.out.println("------------------------------------------------------------------");
@@ -289,8 +262,10 @@ public class SubjectPublishImpl implements SubjectPublish {
 		}
 	}
 	
-	//function to delete a subject
+	
+	
 	@Override
+	//function to delete a subject
 	public void deleteSubject(ArrayList<Subject> subjectsList, int index) {
 		Subject subjectToRemove = subjectsList.get(index);
 		String subjectToRemoveName = subjectToRemove.getSubjectName();
@@ -302,16 +277,11 @@ public class SubjectPublishImpl implements SubjectPublish {
 				removeIndex = subjects.indexOf(subject);
 			}
 		});
-		
 		subjects.remove(removeIndex);	
 		System.out.println("");
 		System.out.println("Deleted subject '"+subjectToRemoveName+"' successfully!");
 		System.out.println("");
-
-
-		viewSubjectsOfGrade(subjectToRemoveGrade);		
-
-
+		viewSubjectsOfGrade(subjectToRemoveGrade);	
 	}
 }
 
