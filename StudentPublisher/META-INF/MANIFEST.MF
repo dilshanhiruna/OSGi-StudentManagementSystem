@@ -6,5 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: studentpublisher.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-16
 Automatic-Module-Name: StudentPublisher
-Import-Package: org.osgi.framework;version="1.3.0"
+Import-Package: databaseservice,
+ org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
+Export-Package: studentpublisher
