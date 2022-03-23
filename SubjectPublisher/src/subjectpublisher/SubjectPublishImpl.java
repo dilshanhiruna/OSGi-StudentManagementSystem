@@ -7,6 +7,10 @@ public class SubjectPublishImpl implements SubjectPublish {
 
 	protected ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
+	//this index is used in deleteSubject method
+	int removeIndex = 0;
+
+	
 	public SubjectPublishImpl() {
 			
 		//add default marks to marks arrayList
@@ -92,7 +96,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 			System.out.println("------------------------------------------------------------------");
 			subjects.forEach((subject) -> {
 				System.out.println(
-					String.format("|%-7s", subjects.indexOf(subject))
+					String.format("|%-7s", subjects.indexOf(subject)+1)
 					+String.format("|%-10s", subject.getGrade())
 					+String.format("|%-15s", subject.getSubjectName())
 					+String.format("|%-10s", subject.getSubjectMedium())
@@ -185,7 +189,8 @@ public class SubjectPublishImpl implements SubjectPublish {
 			
 		}
 		subjects.get(index).setSubjectName(newSubjectName);
-		return;
+		viewSubjectsOfGrade(subjects.get(index).getGrade());		
+;
 	
 	}
 
@@ -210,7 +215,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 			
 		}
 		subjects.get(index).setSubjectMedium(newSubjectMeduim);
-		return;		
+		viewSubjectsOfGrade(subjects.get(index).getGrade());		
 	}
 
 	@Override
@@ -223,7 +228,8 @@ public class SubjectPublishImpl implements SubjectPublish {
 	public void changeTheGrade(ArrayList<Subject> subjects, int index, String newGrade) {
 		
 		subjects.get(index).setGrade(newGrade);
-		return;	
+		viewSubjectsOfGrade(newGrade);		
+;	
 	}
 
 	//this function prints all the subjects of a given grade
@@ -257,7 +263,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 			System.out.println("------------------------------------------------------------------");
 			subjectsOfGivenGrade.forEach((subject) -> {
 				System.out.println(
-					String.format("|%-7s", subjectsOfGivenGrade.indexOf(subject))
+					String.format("|%-7s", subjectsOfGivenGrade.indexOf(subject)+1)
 					+String.format("|%-10s", subject.getGrade())
 					+String.format("|%-15s", subject.getSubjectName())
 					+String.format("|%-10s", subject.getSubjectMedium())
@@ -272,8 +278,27 @@ public class SubjectPublishImpl implements SubjectPublish {
 	
 	//function to delete a subject
 	@Override
-	public void deleteSubjects() {
-		System.out.println("deleteSubjects");	
+	public void deleteSubject(ArrayList<Subject> subjectsList, int index) {
+		Subject subjectToRemove = subjectsList.get(index);
+		String subjectToRemoveName = subjectToRemove.getSubjectName();
+		String subjectToRemoveGrade = subjectToRemove.getGrade();
+
+		subjects.forEach((subject) -> {
+			String gradeOfSubject = subject.getGrade();
+			if(subjectToRemoveName.equals(subject.getSubjectName())&&subjectToRemoveGrade.equals(subject.getGrade())){
+				removeIndex = subjects.indexOf(subject);
+			}
+		});
+		
+		subjects.remove(removeIndex);	
+		System.out.println("");
+		System.out.println("Deleted subject '"+subjectToRemoveName+"' successfully!");
+		System.out.println("");
+
+
+		viewSubjectsOfGrade(subjectToRemoveGrade);		
+
+
 	}
 }
 

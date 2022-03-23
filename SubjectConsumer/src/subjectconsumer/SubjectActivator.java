@@ -108,6 +108,7 @@ public class SubjectActivator implements BundleActivator {
 				Scanner sc = new Scanner(System.in);
 				System.out.println("Enter subject index to edit: ");
 				index = Integer.parseInt(sc.nextLine().trim());
+				index--;
 				
 				System.out.println("What do you want to do with " +subjectsOfGivenGrade.get(index).getSubjectName()+" ?: ");
 				System.out.println("");
@@ -162,10 +163,47 @@ public class SubjectActivator implements BundleActivator {
 				
 				}
 
-			}		}
-		else if(selectedService==5) {
-			subjectPublish.deleteSubjects();
+			}		
 		}
+		else if(selectedService==5) {
+			System.out.println("Please Select a grade:");
+			String selectedGrade = gradeService.getGrade();
+			System.out.println("");
+			
+			ArrayList<Subject> subjectsOfGivenGrade = subjectPublish.printSubjectsOfGrade(selectedGrade);
+			
+			if(subjectsOfGivenGrade.size()!=0) {
+				    
+				String wishToProceed = "n";
+				String newSubjectGrade = null;
+				String newGrade = "";
+				int index = 0;
+
+				
+				while(!"y".equals(wishToProceed)) {
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Enter subject index to delete: ");
+					index = Integer.parseInt(sc.nextLine().trim());
+					index--;
+					System.out.println("");
+					System.out.print("Confirm delete subject? (y/n): ");
+					wishToProceed = sc.next();
+					
+					while(!"y".equals(wishToProceed)&&!"n".equals(wishToProceed)) {
+						System.out.print("Error! Please enter either 'y' or 'n' ");
+						System.out.print("");
+						System.out.print("Confirm delete subject? (y/n): ");
+						wishToProceed = sc.next();
+					}
+					
+				}
+				
+				subjectPublish.deleteSubject(subjectsOfGivenGrade, index);
+
+				
+			}
+		}
+
 		else if(selectedService==0) {
 			System.out.println("-----------------------------");
 			System.out.println("Thank you... Have a nice day!");

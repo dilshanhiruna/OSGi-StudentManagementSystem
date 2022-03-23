@@ -14,8 +14,6 @@ public interface SubjectPublish {
 	public void changeTeacherInCharge(ArrayList<Subject> subjects, int index);
 	public void changeTheGrade(ArrayList<Subject> subjects, int index, String newGrade);
 	public ArrayList<Subject> printSubjectsOfGrade(String grade);
-
-
-	public void deleteSubjects();
+	public void deleteSubject(ArrayList<Subject> subjectsList, int index);
 
 }
