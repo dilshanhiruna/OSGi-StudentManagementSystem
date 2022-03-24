@@ -157,7 +157,7 @@ public class SubjectPublishImpl implements SubjectPublish {
 			System.out.println("Enter subject: ");
 			input = Integer.parseInt(sc.nextLine().trim());
 
-			return subjectsOfGivenGrade.get(input).getSubjectName();
+			return subjectsOfGivenGrade.get(input-1).getSubjectName();
 		}
 	
 		

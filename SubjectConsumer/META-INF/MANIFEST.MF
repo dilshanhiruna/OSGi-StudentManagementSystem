@@ -8,4 +8,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: SubjectConsumer
 Import-Package: gradepublisher,
  org.osgi.framework;version="1.10.0",
- subjectpublisher
+ subjectpublisher;resolution:=optional

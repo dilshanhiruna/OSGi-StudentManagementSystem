@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AssignmentConsumer
+Bundle-SymbolicName: AssignmentConsumer
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: assignmentconsumer.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: AssignmentConsumer
+Import-Package: assignmentpublisher,gradepublisher,org.osgi.framework;version="1.3.0",
+ subjectpublisher
+Bundle-ActivationPolicy: lazy
